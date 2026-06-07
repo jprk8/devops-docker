@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: example-frontend:latest
+    image: frontend:node16-alpine
   backend:
     image: example-backend:latest
     environment:
