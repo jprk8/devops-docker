@@ -2,7 +2,7 @@ services:
   frontend:
     image: frontend:node16-alpine
   backend:
-    image: example-backend:latest
+    image: backend:go1.16-alpine
     environment:
       - REDIS_HOST=redis
       - POSTGRES_HOST=db

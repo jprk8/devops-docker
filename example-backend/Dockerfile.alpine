@@ -1,4 +1,4 @@
-FROM golang:1.26
+FROM golang:1.16-alpine
 
 WORKDIR /usr/src/app
 
@@ -8,7 +8,7 @@ ENV REQUEST_ORIGIN=http://localhost:8000
 RUN go build && \
     go clean -cache -modcache && \
     rm -rf /go/pkg /root/.cache/go-build .git *.go go.mod go.sum && \
-    useradd -m appuser
+    adduser -D appuser
 
 USER appuser
 
