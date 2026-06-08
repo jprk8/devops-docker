@@ -1,16 +1,22 @@
-FROM golang:1.16-alpine
+FROM golang:1.16-alpine AS build-stage
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-ENV REQUEST_ORIGIN=http://localhost:8000
-RUN go build && \
-    go clean -cache -modcache && \
-    rm -rf /go/pkg /root/.cache/go-build .git *.go go.mod go.sum && \
-    adduser -D appuser
+ENV CGO_ENABLED=0
+RUN go build -o server
 
-USER appuser
+
+FROM scratch
+
+WORKDIR /app
+
+ENV REQUEST_ORIGIN=http://localhost:8000
+
+COPY --from=build-stage /usr/src/app/server ./server
+
+USER 10001
 
 EXPOSE 8080
 

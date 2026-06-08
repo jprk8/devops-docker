@@ -2,7 +2,7 @@ services:
   frontend:
     image: frontend:multi-stage
   backend:
-    image: backend:go1.16-alpine
+    image: backend:multi-stage
     environment:
       - REDIS_HOST=redis
       - POSTGRES_HOST=db
