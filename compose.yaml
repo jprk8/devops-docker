@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: frontend:node16-alpine
+    image: frontend:multi-stage
   backend:
     image: backend:go1.16-alpine
     environment:
@@ -20,6 +20,7 @@ services:
       - ./database:/var/lib/postgresql
   nginx:
     image: nginx:trixie
+    restart: unless-stopped
     ports:
       - 127.0.0.1:8000:80
     volumes:
